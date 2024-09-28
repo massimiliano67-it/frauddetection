@@ -117,18 +117,13 @@ class _SignInPageState extends State<SignInPage> {
                       // Botón de inicio de sesión
                       ElevatedButton(
                         onPressed: () {
-                          /* if (_formKey.currentState!.validate()) {
+                          if (_formKey.currentState!.validate()) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const HomeScreen()),
+                              MaterialPageRoute(builder: (context) =>  HomeScreen(stateCard: stateCard)),
                             );
-                          }*/
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    HomeScreen(stateCard: stateCard)),
-                          );
+                          }
+
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
