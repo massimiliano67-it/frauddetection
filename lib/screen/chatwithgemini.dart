@@ -43,7 +43,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final List<({Image? image, String? text, bool fromUser})> _generatedContent =
   <({Image? image, String? text, bool fromUser})>[];
   bool _loading = false;
-  static const String _apiKey = "AIzaSyDeh5kukRvHG3PomSkOtVD032j7WRlJuMA";
+  static const String _apiKey = "AIzaSyAr8elDIHCpi0oXDNuzOguy8Hb0OJyOXxs";
 
 
   String _prommpt ="Eres un agente inteligente de nombre Cindy que me esta escribiendo para validar si reconozco tres unos cargos en mi tarjeta"
@@ -70,8 +70,6 @@ class _ChatScreenState extends State<ChatScreen> {
       systemInstruction: Content.system(_prommpt),
     );
     _chat = _model.startChat();
-
-
     _sendChatMessage("");
   }
 

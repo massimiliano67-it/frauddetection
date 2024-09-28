@@ -6,6 +6,7 @@ import '../api/statecard.dart';
 import '../widget/listbutton.dart';
 import '../widget/listoffering.dart';
 import 'chat.dart';
+import 'chatfirebasegemini.dart';
 import 'chatwithgemini.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -48,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ChatWithGemini(title:"Cindy")),
+      MaterialPageRoute(builder: (context) => ChatWidget(title:"Cindy",stateCard:widget.stateCard)),
     );
 
   }
