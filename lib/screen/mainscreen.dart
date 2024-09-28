@@ -6,6 +6,7 @@ import '../api/statecard.dart';
 import '../widget/listbutton.dart';
 import '../widget/listoffering.dart';
 import 'chat.dart';
+import 'chatwithgemini.dart';
 
 class HomeScreen extends StatefulWidget {
    HomeScreen({super.key,required this.stateCard});
@@ -17,10 +18,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  // ignore: prefer_typing_uninitialized_variables
   late var docData; //docData
 
-  //StateCard stateCard = StateCard(state: 'Activa');
 
 
 
@@ -42,10 +41,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
   Future<void> _getposition() async {
-    Navigator.push(
+    /*Navigator.push(
       context,
       MaterialPageRoute(builder: (context) =>  ChatPage(stateCard:widget.stateCard)),
+    );*/
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ChatWithGemini(title:"Cindy")),
     );
+
   }
 
   @override
