@@ -1,0 +1,98 @@
+[
+  {
+    "author": {
+      "firstName": "Cindy",
+      "id": "4c2307ba-3d40-442f-b1ff-b271f63904ca",
+      "lastName": ""
+    },
+    "createdAt": 1655624460000,
+    "id": "634b2f0b-2486-4bfe-b36d-1c7d6313c7b9",
+    "status": "seen",
+    "text": "Hasta pronto.",
+    "type": "text"
+  },
+  {
+    "author": {
+      "firstName": "Cindy",
+      "id": "4c2307ba-3d40-442f-b1ff-b271f63904ca",
+      "lastName": ""
+    },
+    "createdAt": 1655624460000,
+    "id": "634b2f0b-2486-4bfe-b36d-1c7d6313c7b8",
+    "status": "seen",
+    "text": "Perfecto, un placer poder haberlo ayudado.",
+    "type": "text"
+  },
+  {
+    "author": {
+      "firstName": "Cindy",
+      "id": "4c2307ba-3d40-442f-b1ff-b271f63904ca",
+      "lastName": ""
+    },
+    "createdAt": 1655624460000,
+    "id": "634b2f0b-2486-4bfe-b36d-1c7d6313c7b7",
+    "status": "seen",
+    "text": "¿Te puedo ayudar en algo mas?",
+    "type": "text"
+  },
+  {
+    "author": {
+      "firstName": "Cindy",
+      "id": "4c2307ba-3d40-442f-b1ff-b271f63904ca",
+      "lastName": ""
+    },
+    "createdAt": 1655624460000,
+    "id": "634b2f0b-2486-4bfe-b36d-1c7d6313c7b1",
+    "status": "seen",
+    "text": "Si, su dirección es El Remanso de Las Condes 11.110, Casa 52b.",
+    "type": "text"
+  },
+  {
+    "author": {
+      "firstName": "Cindy",
+      "id": "4c2307ba-3d40-442f-b1ff-b271f63904ca",
+      "lastName": ""
+    },
+    "createdAt": 1655624460000,
+    "id": "634b2f0b-2486-4bfe-b36d-1c7d6313c7b6",
+    "status": "seen",
+    "text": "Está bien, rechazaré estos cargos ahora mismo. También cancelaré tu tarjeta y te enviaré otra por correo. Debería llegar en 3 a 5 días.",
+    "type": "text"
+  },
+  {
+    "author": {
+      "firstName": "Cindy",
+      "id": "4c2307ba-3d40-442f-b1ff-b271f63904ca",
+      "lastName": ""
+    },
+    "createdAt": 1655624460000,
+    "id": "634b2f0b-2486-4bfe-b36d-1c7d6313c7b5",
+    "status": "seen",
+    "text": "Entiendo. Veo que se han realizado varios intentos de usar su tarjeta con otros minoristas en línea. Esto es lo que puedo hacer para ayudar. Primero, revisemos estos cargos pendientes: ¿los reconoce?",
+    "type": "text"
+  },
+  {
+    "author": {
+      "firstName": "Cindy",
+      "id": "4c2307ba-3d40-442f-b1ff-b271f63904ca",
+      "lastName": ""
+    },
+    "createdAt": 1655624460000,
+    "id": "634b2f0b-2486-4bfe-b36d-1c7d6313c7b4",
+    "status": "seen",
+    "text": "Tienen su sede en Temuco, Chile. Son un minorista en línea de productos de salud y belleza",
+    "type": "text"
+  },
+  {
+    "author": {
+      "firstName": "Cindy",
+      "id": "4c2307ba-3d40-442f-b1ff-b271f63904ca",
+      "lastName": ""
+    },
+    "createdAt": 1655624460000,
+    "id": "634b2f0b-2486-4bfe-b36d-1c7d6313c7b3",
+    "status": "seen",
+    "text": "Hola, Massimiliano. Soy Cyndi, la asistente virtual de Banco de Chile. Veamos esto. ¿Reconoces este cargo del 20 de agosto de BigMerchEnterprises?",
+    "type": "text"
+  }
+]
