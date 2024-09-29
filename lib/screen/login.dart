@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fraudetection/api/statecard.dart';
-import 'package:fraudetection/screen/mainscreen.dart';
+import 'package:fraudetection/screen/splashscreen.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -29,16 +29,7 @@ class _SignInPageState extends State<SignInPage> {
         children: [
           // Fondo degradado azul cielo
           Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.blue[100]!,
-                  Colors.blue[500]!,
-                ],
-              ),
-            ),
+            color: const Color.fromRGBO(2, 17, 79, 1)
           ),
           Center(
             child: SingleChildScrollView(
@@ -50,7 +41,7 @@ class _SignInPageState extends State<SignInPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Image.asset('assets/images/bancodeChileLogo.png'),
+                      Image.asset('assets/images/Banco_de_Chile_Logo.png'),
                       const SizedBox(height: 40),
                       // Título de la página
                       const Text(
@@ -66,10 +57,12 @@ class _SignInPageState extends State<SignInPage> {
                       // Campo de correo electrónico
                       TextFormField(
                         controller: _emailController,
+                        style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           labelText: 'Correo electrónico',
                           labelStyle: const TextStyle(color: Colors.white),
                           filled: true,
+
                           fillColor: Colors.white.withOpacity(0.2),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25),
@@ -92,6 +85,7 @@ class _SignInPageState extends State<SignInPage> {
                       TextFormField(
                         controller: _passwordController,
                         obscureText: true,
+                        style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           labelText: 'Contraseña',
                           labelStyle: const TextStyle(color: Colors.white),
@@ -117,12 +111,16 @@ class _SignInPageState extends State<SignInPage> {
                       // Botón de inicio de sesión
                       ElevatedButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) =>  HomeScreen(stateCard: stateCard)),
-                            );
-                          }
+                          // if (_formKey.currentState!.validate()) {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(builder: (context) =>  SplashScreen(stateCard: stateCard)),
+                          //   );
+                          // }
+                          Navigator.push(
+                                   context,
+                                   MaterialPageRoute(builder: (context) =>  SplashScreen(stateCard: stateCard)),
+                                 );
 
                         },
                         style: ElevatedButton.styleFrom(

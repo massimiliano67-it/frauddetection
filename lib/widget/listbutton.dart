@@ -5,41 +5,67 @@ class ListButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildActionButton(Icons.phone_android, 'Recargar \n celular'),
-              _buildActionButton(Icons.design_services, 'Transferir \n '),
-              _buildActionButton(
-                  Icons.credit_card, 'Créditos  \n pre-aprbado'),
-              _buildActionButton(Icons.credit_card, 'Código de \n aprobación'),
-            ],
+      child: ListView(scrollDirection: Axis.horizontal, children:[
+        Padding(
+          padding: const EdgeInsets.only(left: 5, right: 15, top: 5, bottom: 5),
+          child: SizedBox(
+            //width: 10,
+            height: 15,
+            child: _buildActionButton(Icons.design_services, 'Transferir \n '),
           ),
-          const SizedBox(height: 20.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildActionButton(Icons.phone_android, 'Promos \n'),
-              _buildActionButton(Icons.design_services, 'Tienda \n'),
-              _buildActionButton(Icons.credit_card, 'Cambiar \n dólares'),
-              _buildActionButton(Icons.hdr_plus, 'Ver Más \n'),
-            ],
-          )
-        ],
-      ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 5, right: 8, top: 5, bottom: 5),
+          child: SizedBox(
+            //width: 10,
+            height: 15,
+            child: _buildActionButton(Icons.credit_card, 'Créditos  \n pre-aprbado'),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 5, right: 15, top: 5, bottom: 5),
+          child: SizedBox(
+            //width: 10,
+            height: 15,
+            child: _buildActionButton(Icons.credit_card, 'Lista \n movimientos'),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 5, right: 15, top: 5, bottom: 5),
+          child: SizedBox(
+            //width: 10,
+            height: 15,
+            child: _buildActionButton(Icons.phone_android, 'Promos \n'),
+          ),
+
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 5, right: 15, top: 5, bottom: 5),
+          child: SizedBox(
+            //width: 10,
+            height: 15,
+            child: _buildActionButton(Icons.design_services, 'Tienda \n'),
+          ),
+
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 5, right: 15, top: 5, bottom: 5),
+          child: SizedBox(
+            //width: 10,
+            height: 15,
+            child: _buildActionButton(Icons.credit_card, 'Cambiar \n dólares'),
+          ),
+
+        ),
+      ],
+    ),
     );
   }
 }
 
-Widget _buildTextButton(String label) {
-  return TextButton(
-    onPressed: () {},
-    child: Text(label),
-  );
-}
+
 
 Widget _buildActionButton(IconData icon, String label) {
   return Column(

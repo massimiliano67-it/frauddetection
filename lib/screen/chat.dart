@@ -119,8 +119,8 @@ class _ChatPageState extends State<ChatPage> {
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
           title: Text("Cindy"),
-          leading: new IconButton(
-            icon: new Icon(Icons.arrow_back),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
             onPressed: () => {
               widget.stateCard.state = "Bloqueada",
               Navigator.push(

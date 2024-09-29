@@ -15,7 +15,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_vertexai/firebase_vertexai.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
 import '../api/statecard.dart';
@@ -41,8 +40,8 @@ class _ChatScreenState extends State<ChatScreenFirebaseGemini> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        leading: new IconButton(
-          icon: new Icon(Icons.arrow_back),
+        leading:  IconButton(
+          icon:  Icon(Icons.arrow_back),
           onPressed: () => {
             Navigator.push(
               context,
@@ -70,7 +69,6 @@ class ChatWidget extends StatefulWidget {
 
 class _ChatWidgetState extends State<ChatWidget> {
   late final GenerativeModel _model;
-  late final GenerativeModel _functionCallModel;
   ChatSession? _chat;
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
@@ -83,7 +81,7 @@ class _ChatWidgetState extends State<ChatWidget> {
       "Eres un agente inteligente de nombre Cindy que me esta escribiendo para validar si reconozco tres unos cargos en mi tarjeta"
       "El dialogo lo debe iniciar tu, te presenta, me saluda (mi nombre es Massimiliano) preguntándome si un reconozco un cargo de 50.000 pesos en un comercio (puedes inventar el rubro) de hacer 15 días atrás"
       "-- ejemplo: Hola Massimiliano soy Cindy, tu asistente persona del Banco de Chile"
-      " Una vez que contesto a la primera pregunta de manera negativa o positiva, tu me muestra otros dos cargos (pones nombres de fantasía). Si yo rechazo todo, tu me anula el cargo y me boquea la tarjeta y me dice me enviará una nueva en 3 5 días hábiles. Me debe pedir de confirmar la dirección (inventa una ficticia en Santiago de Chile, Las Condes)"
+      " Una vez que contesto a la primera pregunta de manera negativa o positiva, tu me muestra otros dos cargos (pones nombres de fantasía). Si yo rechazo todo, tu me anula el cargo y me boquea la tarjeta y me dice me enviará una nueva en 3 5 días hábiles. Me debe pedir de confirmar la dirección que es El Remanso de Las Condes 11.110, Las Condes"
       " Cuando hace el resumen y me dice si bloque la tarjeta, debe ser especifico que anula los cargos no reconocidos y acuérdate de los cargo que reconocí"
       " Puedes aceptar preguntas para validar los comercios por ejemplo saber la dirección"
       "-- ejemplo me das la dirección del comercio?"

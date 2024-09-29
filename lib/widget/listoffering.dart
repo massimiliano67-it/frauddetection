@@ -31,7 +31,7 @@ class ListOffering extends StatelessWidget {
             child: ListTile(
               leading: Icon(Icons.credit_card),
               title: Text('2x1 en Kart'),
-              subtitle: Text('A solo 45.500 clp'),
+              subtitle: Text('A solo 45.500 Pesos'),
 
             ),
           ),

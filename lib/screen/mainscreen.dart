@@ -3,11 +3,9 @@ import 'package:u_credit_card/u_credit_card.dart';
 
 import '../api/listtransaction.dart';
 import '../api/statecard.dart';
-import '../widget/listbutton.dart';
 import '../widget/listoffering.dart';
-import 'chat.dart';
+import '../widget/saldowidget.dart';
 import 'chatfirebasegemini.dart';
-import 'chatwithgemini.dart';
 
 class HomeScreen extends StatefulWidget {
    HomeScreen({super.key,required this.stateCard});
@@ -22,30 +20,27 @@ class _HomeScreenState extends State<HomeScreen> {
   late var docData; //docData
 
 
-
-
-
   List<ListTransacion> listtransaction = [
     ListTransacion(
         name: "Raul Ramos",
-        datetransaction: "05 Mar 2024 - 04:30 pm",
+        datetransaction: "12 Sept 2024 - 04:30 pm",
         ammonut: "350.000 CLP"),
     ListTransacion(
         name: "Victor Sosa",
-        datetransaction: "21 Mar 2024 - 09:30 am",
+        datetransaction: "21 Sep 2024 - 09:30 am",
         ammonut: "145.000 CLP"),
     ListTransacion(
         name: "Luis Valdez",
-        datetransaction: "3 Abr 2024 - 10:30 am",
-        ammonut: "250.000 CLP"),
+        datetransaction: "29 Sep 2024 - 10:30 am",
+        ammonut: "-250.000 CLP"),
+    ListTransacion(
+        name: "Luis baeza",
+        datetransaction: "30 Sep 2024 - 22:30 pm",
+        ammonut: "-150.000 CLP"),
   ];
 
 
   Future<void> _getposition() async {
-    /*Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) =>  ChatPage(stateCard:widget.stateCard)),
-    );*/
 
     Navigator.push(
       context,
@@ -63,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: const Icon(Icons.add),
         ),
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: const Text('Hola, Massimiliano'),
           actions: const [
             Icon(Icons.notifications),
@@ -71,10 +67,15 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         body: Container(
-            color: const Color.fromRGBO(33, 89, 186, 1),
+            color: const Color.fromRGBO(4, 23, 102, 1),
             child: Column(children: [
               const SizedBox(height: 90, child: ListOffering()),
-              const ListButton(),
+              SizedBox(height: 180, width: MediaQuery.of(context).size.width, child:
+              const Padding(padding: EdgeInsets.all(10),
+              child: SaldoWidget())
+              //ListButton())
+              ),
+              //const ListButton(),
               Expanded(
                 child: Card(
                   shape: RoundedRectangleBorder(
@@ -83,32 +84,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Color.fromRGBO(33, 89, 186, 1),
                     ),
                   ),
-                  child: Column(
+                  child:
+                  SingleChildScrollView(
+                  child:
+                  Column(
                     children: [
-                      /*Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          side: const BorderSide(
-                            color: Color.fromRGBO(33, 89, 186, 1),
-                          ),
-                        ),
-                        elevation: 16,
-                        shadowColor: Color.fromRGBO(33, 89, 186, 1),
-                        child: const ListTile(
-                          leading: Icon(
-                            Icons.account_balance,
-                            color: Color.fromRGBO(33, 89, 186, 1),
-                          ),
-                          title: Text(
-                            'Revisar tu saldo',
-                            style: TextStyle(
-                              fontSize: 20,
-                              //COLOR DEL TEXTO TITULO
-                              color: Color.fromRGBO(33, 89, 186, 1),
-                            ),
-                          ),
-                        ),
-                      ),*/
                       Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
@@ -119,6 +99,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         elevation: 16,
                         shadowColor: const Color.fromRGBO(33, 89, 186, 1),
                         child:
+                        InkWell(
+                          onDoubleTap:(){
+                            setState(() {
+                              widget.stateCard.state = "Activa";
+                            });
+                            },
+                          child:
                          Stack(
                           alignment: Alignment.bottomRight,
                         children: [
@@ -132,12 +119,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           placeNfcIconAtTheEnd: true, // 👈 NFC icon will be at the end,
                         ),
                           Padding(
-                            padding: const EdgeInsets.only(right: 10),
+                            padding: const EdgeInsets.only(right: 10,bottom: 5),
                             child:Text(widget.stateCard.getStatus(), style: const TextStyle(color: Colors.green),)
                           ,)
-                        ])
+                        ]))
                       ),
                       const Padding(padding: EdgeInsets.only(bottom: 10.0)),
+
                       ListView.builder(
                           shrinkWrap: true,
 
@@ -147,17 +135,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: ListTile(
                                   title: Text(listtransaction[index].name),
                                   subtitle: Text(listtransaction[index].datetransaction),
-                                  leading: const CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                          "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
+                                  leading:
+                                  listtransaction[index].ammonut.contains("-") ? const CircleAvatar(  child:Icon(
+                                    Icons.arrow_downward,
+                                    color: Colors.red,
+                                    size: 24.0,
+                                  )) : const CircleAvatar(  child:Icon(
+                                    Icons.arrow_upward,
+                                    color: Colors.green,
+                                    size: 24.0,
+                                  )),
+
+                                     // NetworkImage(
+                                       //   "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
                                   trailing: Text(listtransaction[index].ammonut),
                                 ));
                           }),
-
-
-
                     ],
-                  ),
+                  )),
                 ),
               ),
             ])));
