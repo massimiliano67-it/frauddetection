@@ -29,7 +29,7 @@ class _SignInPageState extends State<SignInPage> {
         children: [
           // Fondo degradado azul cielo
           Container(
-            color: const Color.fromRGBO(2, 17, 79, 1)
+            color: const Color.fromRGBO(2, 30, 75, 1.0)
           ),
           Center(
             child: SingleChildScrollView(
@@ -41,8 +41,8 @@ class _SignInPageState extends State<SignInPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Image.asset('assets/images/Banco_de_Chile_Logo.png'),
-                      const SizedBox(height: 40),
+                      Image.asset('assets/images/Banco_de_Chile_Logo.png',width: 300,height: 200,),
+                      //const SizedBox(height: 10),
                       // Título de la página
                       const Text(
                         'Iniciar Sesión',
