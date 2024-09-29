@@ -98,10 +98,6 @@ class _ChatWidgetState extends State<ChatWidget> {
         model: 'gemini-1.5-flash-002',
         systemInstruction: Content.system(_prompt),
       );
-      _functionCallModel = FirebaseVertexAI.instance.generativeModel(
-        model: 'gemini-1.5-flash-002',
-        systemInstruction: Content.system(_prompt),
-      );
       _chat = _model.startChat();
       _sendChatMessage("hola");
     });
