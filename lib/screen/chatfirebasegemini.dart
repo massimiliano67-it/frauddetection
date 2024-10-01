@@ -19,6 +19,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 
 import '../api/statecard.dart';
 import 'mainscreen.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 // REQUIRED if you want to run on Web
 const FirebaseOptions? options = null;
@@ -34,7 +35,10 @@ class ChatScreenFirebaseGemini extends StatefulWidget {
   State<ChatScreenFirebaseGemini> createState() => _ChatScreenState();
 }
 
+
+
 class _ChatScreenState extends State<ChatScreenFirebaseGemini> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +70,7 @@ class ChatWidget extends StatefulWidget {
   @override
   State<ChatWidget> createState() => _ChatWidgetState();
 }
+enum TtsState { playing, stopped, paused, continued }
 
 class _ChatWidgetState extends State<ChatWidget> {
   late final GenerativeModel _model;
@@ -79,15 +84,142 @@ class _ChatWidgetState extends State<ChatWidget> {
 
   String _prompt =
       "Eres un agente inteligente de nombre Cindy que me esta escribiendo para validar si reconozco tres unos cargos en mi tarjeta"
-      "El dialogo lo debe iniciar tu, te presenta, me saluda (mi nombre es Massimiliano) preguntándome si un reconozco un cargo de 50.000 pesos en un comercio (puedes inventar el rubro) de hacer 15 días atrás"
-      "-- ejemplo: Hola Massimiliano soy Cindy, tu asistente persona del Banco de Chile"
+      "El dialogo lo debe iniciar tu, te presenta, me saluda (mi nombre es Massimiliano) preguntándome si un reconozco un cargo de (puedes usar un valor entre 1.000.000 y 1.500.000) de pesos en un comercio (puedes inventar el rubro) de hacer 5 minutos  atrás"
+      "La razon de la sospecha que es un fradue es el alto monto"
+      "especificar la razon de la sospecha de fraude"
+      "Considera siempre que el primer cargo se realizó hace meno de 10. Los otros cargos se hicieron antes"
+      "nunca debe decir la hora"
+      "Los montos del segundo y tercer cargos no pueden ser mayor de 100.000 pesos"
+      "-- ejemplo: Hola Massimiliano soy Cindy, tu asistente personal del Banco de Chile."
       " Una vez que contesto a la primera pregunta de manera negativa o positiva, tu me muestra otros dos cargos (pones nombres de fantasía). Si yo rechazo todo, tu me anula el cargo y me boquea la tarjeta y me dice me enviará una nueva en 3 5 días hábiles. Me debe pedir de confirmar la dirección que es El Remanso de Las Condes 11.110, Las Condes"
       " Cuando hace el resumen y me dice si bloque la tarjeta, debe ser especifico que anula los cargos no reconocidos y acuérdate de los cargo que reconocí"
       " Puedes aceptar preguntas para validar los comercios por ejemplo saber la dirección"
       "-- ejemplo me das la dirección del comercio?"
-      " Para calcular las fechas considera que hoy estamos a 7 de octubre del 2024"
+      "cuando escribe los montos en pesos, pones solo el numero con formato numerico (con los puntos) sin el signo '\$' "
+      " Para calcular las fechas considera que hoy estamos a 8 de octubre del 2024"
       " Al final cuando me saluda, en caso que bloqueaste la tarjeta avísame que el numero de caso asociado al bloqueo de la tarjeta de crédito es el numero (puedes inventar un numero de 6 dígitos)"
       " Si te hago pregunta afuera de este guion, debe contestar que por seguridad no está habilitada a responder a preguntas que no están relacionadas con esta conversación. Si estas habilitada a darme las direcciones de los comercios";
+
+  //for TTS
+  late FlutterTts flutterTts;
+  String? language = "es-mx";
+  String? engine;
+  double volume = 0.5;
+  double pitch = 1.0;
+  double rate = 0.5;
+  bool isCurrentLanguageInstalled = false;
+
+  String? _newVoiceText;
+  int? _inputLength;
+
+  TtsState ttsState = TtsState.stopped;
+
+  bool get isPlaying => ttsState == TtsState.playing;
+  bool get isStopped => ttsState == TtsState.stopped;
+  bool get isPaused => ttsState == TtsState.paused;
+  bool get isContinued => ttsState == TtsState.continued;
+  bool isAndroid = true;
+
+  @override
+  void dispose() {
+    super.dispose();
+    flutterTts.stop();
+  }
+
+  dynamic initTts() {
+    flutterTts = FlutterTts();
+
+    _setAwaitOptions();
+
+    if (isAndroid) {
+      _getDefaultEngine();
+      _getDefaultVoice();
+      _setlanguage(language!);
+
+    }
+
+    flutterTts.setStartHandler(() {
+      setState(() {
+        print("Playing");
+        ttsState = TtsState.playing;
+        _loading = true;
+      });
+    });
+
+    flutterTts.setCompletionHandler(() {
+      setState(() {
+        print("Complete");
+        ttsState = TtsState.stopped;
+        _loading = false;
+      });
+    });
+
+    flutterTts.setCancelHandler(() {
+      setState(() {
+        print("Cancel");
+        ttsState = TtsState.stopped;
+        _loading = false;
+      });
+    });
+
+    flutterTts.setPauseHandler(() {
+      setState(() {
+        print("Paused");
+        ttsState = TtsState.paused;
+        _loading = false;
+      });
+    });
+
+    flutterTts.setContinueHandler(() {
+      setState(() {
+        print("Continued");
+        ttsState = TtsState.continued;
+        _loading = true;
+      });
+    });
+
+    flutterTts.setErrorHandler((msg) {
+      setState(() {
+        print("error: $msg");
+        ttsState = TtsState.stopped;
+        _loading = false;
+      });
+    });
+  }
+
+  Future<void> _speak(String textToVoice) async {
+    await flutterTts.setVolume(volume);
+    await flutterTts.setSpeechRate(rate);
+    await flutterTts.setPitch(pitch);
+
+    if (textToVoice.isNotEmpty) {
+      await flutterTts.speak(textToVoice);
+    }
+    }
+
+  Future<void> _setAwaitOptions() async {
+    await flutterTts.awaitSpeakCompletion(true);
+  }
+
+  Future<void> _getDefaultEngine() async {
+    var engine = await flutterTts.getDefaultEngine;
+    if (engine != null) {
+      print(engine);
+    }
+  }
+
+  Future<void> _getDefaultVoice() async {
+    var voice = await flutterTts.getDefaultVoice;
+    if (voice != null) {
+      print(voice);
+    }
+  }
+
+  Future<void> _setlanguage(String language) async {
+    await flutterTts.setLanguage(language);
+}
+
+
 
   @override
   void initState() {
@@ -100,6 +232,7 @@ class _ChatWidgetState extends State<ChatWidget> {
       );
       _chat = _model.startChat();
       _sendChatMessage("hola");
+      initTts();
     });
   }
 
@@ -266,6 +399,8 @@ class _ChatWidgetState extends State<ChatWidget> {
           widget.stateCard.state = _findBlockCardWord(text);
           print("STATE :" + widget.stateCard.state);
         }
+        print("RESPONSE: " + text.toString());
+        //_speak(text);
       }
     } catch (e) {
       _showError(e.toString());
