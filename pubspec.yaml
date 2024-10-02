@@ -78,6 +78,7 @@ flutter:
     - assets/images/Arrows_Green.png
     - assets/images/Arrows_Red.png
     - assets/images/visa_logo.png
+    - assets/images/onlyBGemini.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
